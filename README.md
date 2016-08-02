@@ -23,6 +23,10 @@ Dir.glob('log_*').map { |filename| Forky.global_pool.run { LogParser.parse(filen
 
 Inspired by other popular libraries like [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby), [foreman](https://github.com/ddollar/foreman), and [parallel_tests](https://github.com/grosser/parallel_tests), forky looks to provide solutions for this. It does so by creating a few lightweight concurrency primitives (such as futures, workers, and pools) and then optimizing that API for the scripter (e.g. you). We aim for "good enough" concurrency for your everyday tasks. We don't look to implement a robust job queuing system, but instead we want to make a user-friendly tool that is good enough for turning those hour long scripts into ones that only take a few minutes.
 
+## Caveats
+
+Because `Forky` does computation in forked workers then it's important to keep in mind that side-effects are not propagated to the parent process. For example, any assignment you perform in asynchronous blocks will **not** be reflected in the parent process since processes don't share memory. If you want to make changes to your parent process you should run `#reduce` or something similar on the values returned from the asynchronous workers.
+
 ## Explanation
 
 See `test/integration_test.rb` for usage examples.
