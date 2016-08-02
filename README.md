@@ -4,7 +4,7 @@ a library for simple distributed tasks
 
 ## Installation
 
-```rb
+```
 gem install forky
 ```
 
