@@ -10,6 +10,8 @@ gem install forky
 
 ## Usage
 
+See `test/integration_test.rb` for some usage examples.
+
 `Forky::ForkedProcess` is a wrapper around `fork`. In addition to raw forking it provides
 an IPC mechanism, object serialization, and a consistent interface similar to that of `Thread`.
 
