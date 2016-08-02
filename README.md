@@ -8,9 +8,18 @@ a library for simple distributed tasks
 gem install forky
 ```
 
-## Usage
+## Quick-start
 
-See `test/integration_test.rb` for some usage examples.
+Below are some quick real-life examples of how to use `Forky`:
+
+```rb
+# Parse log files in parallel
+Dir.glob('log_*').map { |filename| Forky.global_pool.run { LogParser.parse(filename) }}.map(&:value)
+```
+
+## Description
+
+See `test/integration_test.rb` for usage examples.
 
 `Forky::ForkedProcess` is a wrapper around `fork`. In addition to raw forking it provides
 an IPC mechanism, object serialization, and a consistent interface similar to that of `Thread`.
