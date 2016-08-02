@@ -265,5 +265,4 @@ module Forky
   def self.global_pool
     @pool ||= Pool.new
   end
-  self.global_pool
 end
