@@ -1,6 +1,6 @@
 # Forky
 
-a library for simple distributed tasks
+a library for simple parallel tasks
 
 ## Installation
 
