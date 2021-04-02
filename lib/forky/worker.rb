@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'concurrent/set'
-
 module Forky
   class Worker
     include MonitorMixin

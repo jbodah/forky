@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'concurrent/set'
+
 module Forky
   # Used to limit the number of workers allowed
   class Pool
