@@ -44,7 +44,7 @@ module Forky
     end
 
     def join
-      Process.wait @pid
+      Process.wait(@pid)
       self
     end
 
@@ -59,6 +59,6 @@ module Forky
   end
 
   def self.global_pool
-    @pool ||= Pool.new
+    @global_pool ||= Pool.new
   end
 end

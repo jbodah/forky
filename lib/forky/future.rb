@@ -47,8 +47,8 @@ module Forky
       synchronize { @resolved }
     end
 
-    def resolved=(r)
-      synchronize { @resolved = r }
+    def resolved=(value)
+      synchronize { @resolved = value }
     end
 
     class ThenProxy
@@ -56,9 +56,9 @@ module Forky
         @future = future
       end
 
-      def method_missing(sym, *args, &block)
+      def method_missing(method_name, *args, &block)
         @future.then do |value|
-          value.public_send(sym, *args, &block)
+          value.public_send(method_name, *args, &block)
         end
       end
     end

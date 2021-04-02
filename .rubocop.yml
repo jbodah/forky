@@ -1,0 +1,23 @@
+AllCops:
+  NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - 'spec/**/*'
+
+Security/MarshalLoad:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MissingRespondToMissing:
+  Enabled: false
+
+Style/Semicolon:
+  Enabled: false
