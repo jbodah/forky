@@ -1,6 +1,6 @@
 # Forky
 
-a library for simple parallel tasks
+A library for simple parallel tasks
 
 ## Installation
 
@@ -19,13 +19,33 @@ Dir.glob('log_*').map { |filename| Forky.global_pool.run { LogParser.parse(filen
 
 ## Description
 
-`Forky` is a lightweight library for parallelizing tasks. It's designed first and foremost for ad-hoc scripting and is meant to fill-in the parallelization gap that Ruby has. For example, let's say you have a bunch of `user_ids` that you want to perform some expensive operation on quickly. You could iterate over them and do computations sequentially, but that might take forever. Alternatively, you could use MRI threads, but MRI threads do not run in parallel and a lot of Ruby code is not thread safe. Another option you have is to use `fork`, but then how will you return the results? You'd have to roll your own IPC and suddenly what felt like it should be effortless winds up being a lot of custom code. Even if you do, what if you have tons of ids? Now you need to worry about pooling your workers. What a mess!
+`Forky` is a lightweight library for parallelizing tasks. It's designed first and foremost
+for ad-hoc scripting and is meant to fill-in the parallelization gap that Ruby has.
+For example, let's say you have a bunch of `user_ids` that you want to perform
+some expensive operation on quickly. You could iterate over them and do computations
+sequentially, but that might take forever. Alternatively, you could use MRI threads,
+but MRI threads do not run in parallel and a lot of Ruby code is not thread safe.
+Another option you have is to use `fork`, but then how will you return the results?
+You'd have to roll your own IPC and suddenly what felt like it should be effortless
+winds up being a lot of custom code. Even if you do, what if you have tons of ids?
+Now you need to worry about pooling your workers. What a mess!
 
-Inspired by other popular libraries like [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby), [foreman](https://github.com/ddollar/foreman), and [parallel_tests](https://github.com/grosser/parallel_tests), forky looks to provide solutions for this. It does so by creating a few lightweight concurrency primitives (such as futures, workers, and pools) and then optimizing that API for the scripter (e.g. you). We aim for "good enough" concurrency for your everyday tasks. We don't look to implement a robust job queuing system, but instead we want to make a user-friendly tool that is good enough for turning those hour long scripts into ones that only take a few minutes.
+Inspired by other popular libraries like [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby),
+[foreman](https://github.com/ddollar/foreman), and [parallel_tests](https://github.com/grosser/parallel_tests),
+Forky looks to provide solutions for this. It does so by creating a few lightweight
+concurrency primitives (such as futures, workers, and pools) and then optimizing that
+API for the scripter (e.g. you). We aim for "good enough" concurrency for your everyday tasks.
+We don't look to implement a robust job queuing system, but instead we want to make a
+user-friendly tool that is good enough for turning those hour long scripts into ones
+that only take a few minutes.
 
 ## Caveats
 
-Because `Forky` does computation in forked workers then it's important to keep in mind that side-effects are not propagated to the parent process. For example, any assignment you perform in asynchronous blocks will **not** be reflected in the parent process since processes don't share memory. If you want to make changes to your parent process you should run `#reduce` or something similar on the values returned from the asynchronous workers.
+Because `Forky` does computation in forked workers then it's important to keep in mind
+that side-effects are not propagated to the parent process. For example, any assignment
+you perform in asynchronous blocks will **not** be reflected in the parent process since
+processes don't share memory. If you want to make changes to your parent process you
+should run `#reduce` or something similar on the values returned from the asynchronous workers.
 
 ## Explanation
 
