@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 require 'socket'
 
 module Forky
-
   # A one-time use abstraction around a forked process which
   # encapsulates IPC and status
   class ForkedProcess
     module IPC
       class UNIXSocket
         def initialize
-          @serializer = -> (n) { Marshal.dump(n) }
-          @deserializer = -> (n) { Marshal.load(n) }
+          @serializer = ->(n) { Marshal.dump(n) }
+          @deserializer = ->(n) { Marshal.load(n) }
           @parent, @child = ::UNIXSocket.pair
         end
 

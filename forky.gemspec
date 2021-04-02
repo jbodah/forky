@@ -1,5 +1,6 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+# frozen_string_literal: true
+
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'forky/version'
 
@@ -9,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Josh Bodah']
   spec.email         = ['jb3689@yahoo.com']
 
-  spec.summary       = %q{Library for simple distributed tasks}
+  spec.summary       = 'A library for simple distributed tasks'
   spec.homepage      = 'https://github.com/jbodah/forky'
   spec.license       = 'MIT'
 

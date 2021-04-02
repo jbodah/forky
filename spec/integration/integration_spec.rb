@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 
 RSpec.describe 'integration' do
@@ -15,9 +17,9 @@ RSpec.describe 'integration' do
     # forked.send_msg('world!')
 
     # fork/join
-    10.times.map do |n|
-      Forky.fork do |f|
-        puts "sleeping for 1"
+    10.times.map do |_n|
+      Forky.fork do |_f|
+        puts 'sleeping for 1'
         sleep 1
       end
     end.map(&:join)

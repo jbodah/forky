@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Forky
   class Future
     include MonitorMixin
@@ -17,7 +19,7 @@ module Forky
     end
 
     def join
-      sleep 1 until self.resolved?
+      sleep 1 until resolved?
       self
     end
 

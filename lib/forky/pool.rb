@@ -1,5 +1,6 @@
-module Forky
+# frozen_string_literal: true
 
+module Forky
   # Used to limit the number of workers allowed
   class Pool
     def initialize(size: 10)
@@ -31,9 +32,7 @@ module Forky
 
       future, block = @queue.deq
       future.then do
-        if @commissioned_workers.include? worker
-          @ready_workers.enq worker
-        end
+        @ready_workers.enq worker if @commissioned_workers.include?(worker)
       end
 
       worker.run(future, &block)
